@@ -1,0 +1,239 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Verdana-Bold;\f1\fnil\fcharset0 Verdana;\f2\fnil\fcharset0 Verdana-Italic;
+}
+{\colortbl;\red255\green255\blue255;\red241\green241\blue241;\red158\green128\blue255;\red39\green128\blue255;
+\red128\green128\blue128;\red255\green0\blue0;\red64\green227\blue0;}
+{\*\expandedcolortbl;;\csgray\c95739;\csgenericrgb\c62067\c50000\c100000;\csgenericrgb\c15149\c50000\c99819;
+\csgray\c57231;\csgenericrgb\c100000\c0\c0;\csgenericrgb\c25000\c88889\c0;}
+\deftab480
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf2 use
+\f1\b0 \cf2  \cf3 AppleScript\cf2  \cf4 version\cf2  \cf2 "2.4"\cf2  
+\f2\i \cf5 -- Yosemite (10.10) or later
+\f1\i0 \cf2 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+
+\f0\b \cf2 use
+\f1\b0 \cf2  
+\f2\i \cf4 scripting additions
+\f1\i0 \cf2 \
+\
+
+\f2\i \cf5 -- on idle
+\f1\i0 \cf2 \
+
+\f2\i \cf5 --beep
+\f1\i0 \cf2 \
+
+\f2\i \cf5 --return 5
+\f1\i0 \cf2 \
+
+\f2\i \cf5 --end idle
+\f1\i0 \cf2 \
+
+\f0\b \cf2 on
+\f1\b0 \cf2  \cf6 getFiles\cf2 ()\
+	
+\f0\b \cf2 set
+\f1\b0 \cf2  \cf7 userInputFolder\cf2  
+\f0\b \cf2 to
+\f1\b0 \cf2  \cf2 "/Users/ly/Desktop/test_images"\cf2 \
+	
+\f0\b \cf2 set
+\f1\b0 \cf2  \cf7 inputFolder\cf2  
+\f0\b \cf2 to
+\f1\b0 \cf2  (
+\f2\i \cf4 POSIX file
+\f1\i0 \cf2  \cf7 userInputFolder\cf2 ) 
+\f0\b \cf2 as
+\f1\b0 \cf2  
+\f2\i \cf4 alias
+\f1\i0 \cf2 \
+	\
+	
+\f0\b \cf2 set
+\f1\b0 \cf2  \cf7 output\cf2  
+\f0\b \cf2 to
+\f1\b0 \cf2  \{\}\
+	\
+	\
+	\cf7 inputFolder\cf2 \
+	
+\f0\b \cf2 tell
+\f1\b0 \cf2  
+\f2\i \cf4 application
+\f1\i0 \cf2  \cf2 "Finder"\cf2 \
+		
+\f0\b \cf2 set
+\f1\b0 \cf2  \cf7 output\cf2  
+\f0\b \cf2 to
+\f1\b0 \cf2  ((
+\f0\b \cf2 every
+\f1\b0 \cf2  
+\f2\i \cf4 file
+\f1\i0 \cf2  
+\f0\b \cf2 in
+\f1\b0 \cf2  
+\f2\i \cf4 folder
+\f1\i0 \cf2  (\cf7 inputFolder\cf2 ) 
+\f0\b \cf2 whose
+\f1\b0 \cf2  \cf3 name extension\cf2  
+\f0\b \cf2 is
+\f1\b0 \cf2  
+\f0\b \cf2 in
+\f1\b0 \cf2  [\cf2 "arw"\cf2 ]) 
+\f0\b \cf2 as
+\f1\b0 \cf2  
+\f2\i \cf4 alias list
+\f1\i0 \cf2 )\
+	
+\f0\b \cf2 end
+\f1\b0 \cf2  
+\f0\b \cf2 tell
+\f1\b0 \cf2 \
+
+\f0\b \cf2 end
+\f1\b0 \cf2  \cf6 getFiles\cf2 \
+\
+
+\f0\b \cf2 on
+\f1\b0 \cf2  \cf6 monitorFolder\cf2 ()\
+	\cf2 "monitor folder"\cf2 \
+
+\f0\b \cf2 end
+\f1\b0 \cf2  \cf6 monitorFolder\cf2 \
+\
+
+\f0\b \cf2 on
+\f1\b0 \cf2  \cf6 watchFolder\cf2 (\cf7 theFolder\cf2 )\
+	
+\f2\i \cf5 -- Check for files in the folder
+\f1\i0 \cf2 \
+	
+\f0\b \cf2 tell
+\f1\b0 \cf2  
+\f2\i \cf4 application
+\f1\i0 \cf2  \cf2 "Finder"\cf2 \
+		
+\f0\b \cf2 set
+\f1\b0 \cf2  \cf7 theFilesToProcess\cf2  
+\f0\b \cf2 to
+\f1\b0 \cf2  
+\f0\b \cf2 every
+\f1\b0 \cf2  
+\f2\i \cf4 file
+\f1\i0 \cf2  
+\f0\b \cf2 of
+\f1\b0 \cf2  \cf7 theFolder\cf2 \
+	
+\f0\b \cf2 end
+\f1\b0 \cf2  
+\f0\b \cf2 tell
+\f1\b0 \cf2 \
+	
+\f2\i \cf5 -- Stop if there are no files to process
+\f1\i0 \cf2 \
+	
+\f0\b \cf2 if
+\f1\b0 \cf2  \cf7 theFilesToProcess\cf2  = \{\} 
+\f0\b \cf2 then
+\f1\b0 \cf2  
+\f0\b \cf2 return
+\f1\b0 \cf2 \
+	\cf7 theFilesToProcess\cf2 \
+	
+\f2\i \cf5 -- Locate an output folder
+\f1\i0 \cf2 \
+	
+\f2\i \cf5 --set theOutputFolder to locateAndCreateFolder(path to desktop folder, "Output")
+\f1\i0 \cf2 \
+	
+\f0\b \cf2 repeat
+\f1\b0 \cf2  
+\f0\b \cf2 with
+\f1\b0 \cf2  \cf7 aFile\cf2  
+\f0\b \cf2 in
+\f1\b0 \cf2  \cf7 theFilesToProcess\cf2 \
+		\
+		
+\f2\i \cf5 -- Process the current file
+\f1\i0 \cf2 \
+		\
+		
+\f2\i \cf5 -- Move the current file to the output folder so it doesn't get processed again
+\f1\i0 \cf2 \
+		
+\f0\b \cf2 tell
+\f1\b0 \cf2  
+\f2\i \cf4 application
+\f1\i0 \cf2  \cf2 "Finder"\cf2 \
+			
+\f2\i \cf5 --move aFile to theOutputFolder
+\f1\i0 \cf2 \
+		
+\f0\b \cf2 end
+\f1\b0 \cf2  
+\f0\b \cf2 tell
+\f1\b0 \cf2 \
+		\
+	
+\f0\b \cf2 end
+\f1\b0 \cf2  
+\f0\b \cf2 repeat
+\f1\b0 \cf2 \
+
+\f0\b \cf2 end
+\f1\b0 \cf2  \cf6 watchFolder\cf2 \
+\
+
+\f2\i \cf5 --MAIN FUNCTION
+\f1\i0 \cf2 \
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf6 monitorFolder\cf2 ()\
+\pard\pardeftab480\slleading40\pardirnatural\partightenfactor0
+\cf2 \
+
+\f0\b \cf2 on
+\f1\b0 \cf2  
+\f0\b \cf4 idle
+\f1\b0 \cf2 \
+	
+\f0\b \cf2 set
+\f1\b0 \cf2  \cf7 userInputFolder\cf2  
+\f0\b \cf2 to
+\f1\b0 \cf2  \cf2 "/Users/ly/Desktop/test_images"\cf2 \
+	
+\f2\i \cf5 -- Locate the folder to watch
+\f1\i0 \cf2 \
+	
+\f2\i \cf5 -- set theFolder to locateAndCreateFolder(path to desktop folder, "Input")
+\f1\i0 \cf2 \
+	
+\f0\b \cf2 set
+\f1\b0 \cf2  \cf7 theFolder\cf2  
+\f0\b \cf2 to
+\f1\b0 \cf2  (
+\f2\i \cf4 POSIX file
+\f1\i0 \cf2  \cf7 userInputFolder\cf2 ) 
+\f0\b \cf2 as
+\f1\b0 \cf2  
+\f2\i \cf4 alias
+\f1\i0 \cf2 \
+	
+\f2\i \cf5 -- Watch the folder
+\f1\i0 \cf2 \
+	\cf6 watchFolder\cf2 (\cf7 theFolder\cf2 )\
+	
+\f2\i \cf5 -- Delay 2 s before checking the folder again
+\f1\i0 \cf2 \
+	
+\f0\b \cf2 return
+\f1\b0 \cf2  \cf2 2\cf2 \
+
+\f0\b \cf2 end
+\f1\b0 \cf2  
+\f0\b \cf4 idle
+\f1\b0 \cf2 \
+\
+}
